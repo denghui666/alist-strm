@@ -1,0 +1,15 @@
+services:
+  alist-strm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: alist-strm:local
+    container_name: alist-strm
+    restart: always
+    ports:
+      - "15000:5000"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./config:/config
+      - ./vol1/1000/media/video:/data
