@@ -12,7 +12,7 @@ from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from db_handler import DBHandler
 from logger import setup_logger
-from task_scheduler import add_tasks_to_cron, update_tasks_in_cron, delete_tasks_from_cron, list_tasks_in_cron, convert_to_cron_time, run_task_immediately
+from task_scheduler import add_tasks_to_cron, update_tasks_in_cron, delete_tasks_from_cron, list_tasks_in_cron, convert_to_cron_time
 
 
 app = Flask(__name__)
@@ -24,6 +24,7 @@ IMAGE_FOLDER = 'static/images'
 
 
 db_handler = DBHandler()
+logger, log_file = setup_logger('app')
 
 local_version = "6.0.6"
 
@@ -1166,7 +1167,6 @@ def load_port_from_env():
 
 
 if __name__ == '__main__':
-    logger, log_file = setup_logger('app')
     # 启动应用之前先检查更新
     check_and_apply_updates()
     sync_cron_with_backup()
